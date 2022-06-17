@@ -12,25 +12,25 @@ import java.util.UUID;
 @Service
 public class PersonService {
 
-    private final Map<UUID, Person> persons = new HashMap<>();
+    private final Map<UUID, Person> people = new HashMap<>();
 
     public PersonService() {
         final UUID komarId = UUID.randomUUID();
-        persons.put(komarId, new Person(komarId, "komar", "Алексей", "ertyuiop"));
+        people.put(komarId, new Person(komarId, "komar", "Алексей", "ertyuiop"));
     }
 
     public Person getByLoginOrThrown(@NonNull String login) {
-        return persons.values().stream()
+        return people.values().stream()
                 .filter(person -> person.getLogin().equals(login))
                 .findFirst()
                 .orElseThrow();
     }
 
     public Person getByIdOrThrown(@NonNull UUID id) {
-        if (!persons.containsKey(id)) {
+        if (!people.containsKey(id)) {
             throw new NotFoundException("Пользователь не найден");
         }
-        return persons.get(id);
+        return people.get(id);
     }
 
 }
