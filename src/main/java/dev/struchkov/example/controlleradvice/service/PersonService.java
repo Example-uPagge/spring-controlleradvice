@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,14 +24,11 @@ public class PersonService {
         return people.values().stream()
                 .filter(person -> person.getLogin().equals(login))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new NotFoundException("Пользователь не найден"));
     }
 
-    public Person getByIdOrThrown(@NonNull UUID id) {
-        if (!people.containsKey(id)) {
-            throw new NotFoundException("Пользователь не найден");
-        }
-        return people.get(id);
+    public Optional<Person> getById(@NonNull UUID id) {
+        return Optional.ofNullable(people.get(id));
     }
 
 }
