@@ -12,14 +12,14 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 public class ExceptionApiHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ErrorMessage> authException(NotFoundException exception) {
+    public ResponseEntity<ErrorMessage> notFoundException(NotFoundException exception) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ErrorMessage(exception.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ErrorMessage> authException(MethodArgumentTypeMismatchException exception) {
+    public ResponseEntity<ErrorMessage> mismatchException(MethodArgumentTypeMismatchException exception) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ErrorMessage(exception.getMessage()));
